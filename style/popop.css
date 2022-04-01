@@ -1,0 +1,272 @@
+ /* popop */
+
+ #popop{
+    background-color: rgb(0,0,0,0.6);
+   
+    width: 100%;
+   height: 100%;
+    top: 0%;
+   
+    border: 1px solid;
+   display: none;
+   justify-content: right;
+    position: absolute;
+    
+}
+#cart-popop{
+    width: 30%;
+    height: 100%;
+    float: right;
+ 
+    background-color: white;
+   
+    position: relative;
+}
+#close{
+
+cursor: pointer;
+
+}
+#carthome{
+position: relative;
+}
+#cartshow{
+position: relative;
+width: 20px;
+text-align: center;
+font-weight: lighter;
+border-radius: 50%;
+right: 15%;
+top: 25%;
+height: 20px;
+background-color: red;
+}
+#popopdiv1{
+width: 100%;
+color: white;
+font-size: 13px;
+text-align: center;
+font-weight: bold;
+letter-spacing: 0.5px;
+background-color: red;
+height: 22px;
+
+}
+#popopdiv2{
+display: flex;
+width: 100%;
+color: rgba(255, 255, 255, 0.87);
+
+gap: 20px;
+
+background-color: black;
+height: 40px;
+
+}
+.fa-angle-left{
+margin-left: 2%;
+margin-top: 4%;
+
+font-size: 1.3em;
+}
+#popopdiv2-h3{
+font-weight: bold;
+font-size: 15px;
+}
+#popopdiv2-h3-2{
+font-weight: lighter;
+margin-top: 4%;
+letter-spacing: 0.5px;
+font-size: 16px;
+}
+
+#cart-boxes{
+overflow: scroll;
+width: 100%;
+box-shadow: rgba(75, 74, 74, 0.16) 0px 3px 6px, rgba(112, 112, 112, 0.23) 0px 3px 6px;
+height: 62%;
+}
+#cart-box{
+display: flex;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+height: 140px ;
+
+}
+
+#cart-box-a{
+width: 35%;
+
+
+}
+#cart-box-a >img{
+   width: 80%;
+   margin-top: 10%;
+   margin-left: 2%;
+
+}
+
+#cart-box-b{
+width: 60%;
+
+
+}
+#cart-box-b > h1{
+margin-bottom: 0%;
+font-size: 18px;
+}
+
+#cart-box-b-div2{
+width: 30%;
+text-align: center;
+height: 18px;
+padding-top: 5px;
+font-weight: bold;
+margin-left: 5%;
+background-color: red;
+color:rgba(255, 255, 255, 0.849) ;
+font-size: 12px; 
+
+}
+
+#cart-box-b-div{
+display: flex;
+margin-top: 6%;
+gap: 4%;
+}
+#minus, #plus{
+width: 20px;
+text-align: center;
+color: red;
+font-size: 17px;
+font-weight: 500;
+cursor: pointer;
+border: 1.5px solid black;
+border-radius: 50%;
+height: 20px;
+}
+#ans{
+font-weight: bold;
+font-size: 16px;
+margin-top: 1%;
+}
+#cart-box-c{
+width: 15%;
+
+
+}
+.fa-trash-can{
+
+margin-left: 50%;
+cursor: pointer;
+margin-top: 100%;
+font-size: 1em;
+color: rgb(163, 155, 155);
+}
+
+/* 
+payment */
+
+#payment{
+
+margin-left: 2%;
+margin-right: 2%;
+width: 95%;
+
+height: 32%;
+
+}
+#payment> h1{
+margin-top: 5%;
+font-size: 17px;
+font-weight: 800;
+margin-left: 5%;
+
+}
+#promo-code-input{
+border: none;
+margin-left: 3%;
+border-bottom: 1px solid #00000070;
+width: 60%;
+height: 30px;
+font-size: 12px;
+padding-bottom: 5px;
+padding-left: 0px;
+color: #000;
+}
+#code-apply-button{
+width: 80px;
+cursor: pointer;
+border: 2px solid black;
+color: rgb(22, 22, 22);
+font-weight: bold;
+margin-left: 7%;
+height: 35px;
+border-radius: 20px;
+}
+#subtotal,#shipping{
+
+display: flex;
+margin-top: 5%;
+justify-content: space-between;
+}
+#subtotal >h1,#shipping>h1{
+margin: 0%;
+color: rgb(54, 52, 52);
+font-size: 17px;
+font-weight: 600;
+letter-spacing: 0.5px;
+margin-left: 5%;
+}
+#zest{
+display: flex;
+margin-top: 2%;
+
+gap: 5px;
+background-color: rgb(213, 231, 243);
+height: 23px;
+}
+#zestp{
+height: 20px;
+
+   letter-spacing: 1px;
+color: rgb(73, 71, 71);
+font-size: 11px;
+font-weight: 500;
+
+
+}
+
+
+#zestimg{
+   width: 8%;
+   margin-left: 2%;
+   height: 1%;
+}
+#payment-button{
+   margin-top: 5%;
+   
+   display: flex;
+  margin-left: 5%;
+   gap: 12%;
+}
+#upibutton, #cardbutton{
+width: 40%;
+cursor: pointer;
+letter-spacing: 0.2px;
+border-radius: 25px;
+background-color: red;
+text-align: center;
+color: white;
+font-size: 15px;
+font-weight: 600;
+cursor: pointer;
+border: 1.5px solid red;
+
+height: 47px;
+}
+#cardbutton{
+color: red;
+
+border: 2px solid red;
+background-color: white;
+}

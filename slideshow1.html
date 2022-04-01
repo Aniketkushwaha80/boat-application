@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="Start()">Start</button>
+    <button onclick="Stop()">Stop</button>
+    <div id="show"></div>
+</body>
+</html>
+<script>
+   let id; 
+   
+    function Start(){
+        var div = document.getElementById("show").innerHTML = "";
+        var images = JSON.parse(localStorage.getItem("images"))
+        var img = document.createElement("img");
+        div = document.getElementById("show");
+        img.src = images[0]
+        div.append(img)
+
+
+        var i = 1;
+    id = setInterval(function (){
+            
+            img.src = images[i];
+            i++;
+            if(i==images.length){
+                i=0;
+            }
+        },3000)
+
+    }
+
+
+
+    function Stop(){
+        clearInterval(id)
+    }
+</script>

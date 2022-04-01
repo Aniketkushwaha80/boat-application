@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/navbar.css">
+    <link rel="stylesheet" href="./style/popop.css">
+    <link rel="stylesheet" href="./style/footer.css">
+    <link rel="stylesheet" href="./css/all.min.css">
+    <style>
+        #firstimage{
+            width: 100%;
+
+        }
+        #firstp{
+            color: white;
+            margin: 2%;
+            font-size: 15px;
+        }
+        #firsth1{
+            color: white;
+            margin: 2%;
+            font-size: 38px;
+        }
+        #product1{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-gap:2%;
+            width: 95%;
+        margin: auto;
+          
+          
+        }
+        #product1 >div{
+            border: 1px solid red;
+            width: 100%;
+            height: 500px;
+            background-color: rgb(241,241,241);
+            border-radius: 10px;
+            margin-bottom: 6%;
+          
+        }
+        #product1 >div > img{
+            background-color: rgb(196,196,196);
+            border-radius: 10px;
+            width: 100%;
+            margin: 0%;
+            height: 55%;
+        }
+        #product1 >div > div{
+            padding-left: 4%;
+            width: 100%;
+            margin: 0%;
+            border-radius: 10px;
+            height: 45%;
+        }
+        #star{
+display: flex;
+margin-top: 1%;
+margin-bottom: 0%;
+justify-content: space-between;
+width: 18%;
+height: 5%;
+        
+        }
+        .fa-star{
+          color: red;
+          font-size: 0.6em;
+      
+        }
+        .fa-circle{
+            margin-top:7% ;
+            margin-left: 1%;
+            color: red;
+          font-size: 1em;
+        }
+        #title{
+            font-weight: bold;
+            font-size: 15px;
+           margin-top: 2%;
+           margin-bottom: 0%;
+        }
+        #price{
+           display: flex;
+         gap: 10px;
+         margin-bottom: 0%;
+
+        }
+        #price > p{
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 0%;
+           color: red;
+        }
+        #price > #p1{
+          font-weight: 400;
+       padding-top: 0.5%;
+       margin-bottom: 2%;
+            font-size: 14px;
+           text-decoration: line-through;
+           color: rgb(175, 164, 164);
+        }
+       
+
+        
+      #cart{
+          margin-top:3% ;
+          margin-left: -1%;
+          background-color: black;
+          color: white;
+          width: 40%;
+          font-size: 18px;
+          font-weight: bold;
+          height: 45px;
+          border: 1px solid ;
+          border-radius: 8px;
+      }
+      #sort{
+display: flex;
+margin-right: 4%;
+gap: 10px;
+gap: 20px;
+float: right;
+}
+#select{
+width: 200px;
+background-color: black;
+padding-left: 20px;
+border: 0.5px solid black;
+font-size: 15px;
+color:rgba(255, 255, 255, 0.658);
+height: 30px;
+margin-top: 2%;
+}
+#sort >p{
+
+font-size: 14px;
+
+color:rgb(113, 117, 121);
+}
+        
+    </style>
+</head>
+<body>
+    <div id="header">
+    
+    </div>
+
+
+    <div id="popop">
+
+    </div>
+<!-- //login  -->
+<img id="firstimage" src="https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Airdopes_Catgry-web_7cf20899-eb4a-427f-9a8a-799d7e1c37fa.jpg?v=1634716734" alt="">
+<p id="firstp">Home/Wireless Earbuds</p>
+<h1 id="firsth1">Wireless Earbuds</h1>
+
+<!-- shorts -->
+<div id="sort">
+    <p>Sort By:</p> 
+    <select   name="" id="select">
+        <option value="">Best Selling</option>
+        <option value="low">Price Low-High</option>
+        <option value="high">Price High-Low</option>
+    </select>
+</div>
+<!-- product -->
+
+<div id="product1">
+    
+
+ 
+
+  
+</div>
+ 
+<!-- footer -->
+
+<div id="footer">
+
+
+</div>
+    
+</body>
+</html>
+<script type="module">
+      import navbar from "./components/navbar.js"
+     import popop from "./components/popop.js"
+     import footer from "./components/footer.js"
+     let nav=navbar()
+
+     document.getElementById("header").innerHTML=nav
+
+     let pop=popop()
+
+document.getElementById("popop").innerHTML=pop
+
+     let foot=footer()
+     document.getElementById("footer").innerHTML=foot
+
+    let cartdata=JSON.parse(localStorage.getItem("cartdata"))||[]
+
+    let searchkey=JSON.parse(localStorage.getItem("search"))
+
+
+
+ 
+let url=`https://my-boat-application.herokuapp.com/products`
+
+let data;
+    async function product(){
+       
+    
+
+  
+        try{
+            let res=await fetch(url)
+             data=await res.json()
+            
+             showproduct(data)
+           
+          
+        }
+        catch(error){
+
+        }
+    }
+    product()
+
+
+    function showproduct(data,key){
+        document.querySelector("#product1").innerHTML=""
+      
+        // document.querySelector("#h11").innerHTML=key
+     
+        var stack=[]
+
+data.map((ele)=>{
+
+  
+
+let sum=""
+for(var i=0; i<ele.title.length; i++){
+  if(ele.title[i]!=" "){
+      sum+=ele.title[i]
+
+      
+  }
+  else{
+   let text= sum.toLowerCase()
+
+  
+      if(text==searchkey)
+      
+   
+           appenddata(ele)
+     
+      sum=""
+      
+  }
+}
+     
+    })
+    }
+  
+
+   
+    document.getElementById("select").addEventListener("change",changeitem)
+    function changeitem(){
+       
+         
+        let value=document.querySelector("#select").value
+        if(value=="high"){
+        data.sort(function(a,b){
+           
+            return b.price - a.price
+        })
+    }else if (value=="low"){
+        data.sort(function(a,b){
+            return a.price - b.price
+        })
+    }
+
+    
+
+    setTimeout(function(){
+       showproduct(data)
+    },1000)
+  
+       
+    }
+function appenddata(ele,key){
+   
+    
+   
+        
+  
+        // console.log(ele)
+        let maindiv=document.createElement("div")
+
+        let img=document.createElement("img")
+        img.src=ele.image_link
+
+        let seconddiv=document.createElement("div")
+        let thirddiv=document.createElement("div")
+        thirddiv.id="star"
+        let star1=document.createElement("i")
+        star1.className="fa-solid fa-star"
+        let star2=document.createElement("i")
+        star2.className="fa-solid fa-star"
+        let star3=document.createElement("i")
+        star3.className="fa-solid fa-star"
+        let star4=document.createElement("i")
+        star4.className="fa-solid fa-star"
+        let star5=document.createElement("i")
+        star5.className="fa-solid fa-star"
+        thirddiv.append(star1,star2,star3,star4,star5)
+      
+        let p1=document.createElement("p")
+        p1.id="title"
+        p1.innerText=ele.title
+        
+        
+        let fourthdiv=document.createElement("div")
+        fourthdiv.id="price"
+        let p2=document.createElement("p")
+        p2.innerHTML=ele.price
+        
+        let p3=document.createElement("p")
+        p3.id="p1"
+       
+        p3.innerText="Rs. 2,299.00"
+        fourthdiv.append(p2,p3)
+        
+      
+        let fifthdiv=document.createElement("div")
+        fifthdiv.id="circle"
+      
+        let circle1=document.createElement("i")
+        circle1.className="fa-solid fa-circle"
+        
+        let circle2=document.createElement("i")
+        circle2.className="fa-solid fa-circle"
+        let circle3=document.createElement("i")
+        circle3.className="fa-solid fa-circle"
+        let circle4=document.createElement("i")
+        circle4.className="fa-solid fa-circle"
+        let circle5=document.createElement("i")
+        circle5.className="fa-solid fa-circle"
+        fifthdiv.append(circle1,circle2,circle3,circle4,circle5)
+
+        let button1=document.createElement("button")
+        button1.id="cart"
+        button1.innerText="Add to Cart"
+        button1.addEventListener("click",function(){
+button1.style.backgroundColor="red"
+
+button1.innerHTML="Added to Cart"
+                addtocart(ele)
+        })
+        seconddiv.append(thirddiv,p1,fourthdiv,fifthdiv,button1)
+        
+        maindiv.append(img,seconddiv)
+        
+      
+        document.getElementById("product1").append(maindiv)
+        
+        
+    
+}
+
+function addtocart(item){
+    
+     
+    cartdata.push(item)
+    
+    localStorage.setItem("cartdata",JSON.stringify(cartdata))
+       console.log("cart")
+       cartcount()
+    
+        }
+        cartcount()
+function cartcount(){
+    let totalcart=JSON.parse(localStorage.getItem("cartdata"))
+    document.getElementById("cartshow").innerHTML=totalcart.length
+    console.log(totalcart.length)
+    
+}
+
+// search
+let search=[]
+document.getElementById("searchbar").addEventListener("keypress",(e)=>{
+    if(e.key=="Enter"){
+       
+
+        let value=document.getElementById("searchbar").value.toLowerCase()
+        
+search.push(value)
+localStorage.setItem("search",JSON.stringify(search))
+window.location.href="search.html"
+    }
+
+
+
+})
+
+
+var total=0
+
+function cartdataappend(){
+ cartdata.map((ele)=>{
+     total+=ele.price
+    
+    
+     var maindiv=document.createElement("div")
+     maindiv.id="cart-box"
+
+     var div2=document.createElement("div")
+     div2.id="cart-box-a"
+     var img=document.createElement("img")
+     img.src=ele.image_link
+     div2.append(img)
+     
+  
+
+     var div3=document.createElement("div")
+     div3.id="cart-box-b"
+
+     var h1=document.createElement("h1")
+     h1.innerText=ele.title
+
+ 
+
+     var pricediv=document.createElement("div")
+     pricediv.id="price"
+   var p=document.createElement("p")
+   p.innerText="Rs. "+ele.price
+   var p1=document.createElement("p")
+   p1.id="p1"
+   p1.innerText="Rs. 3,999.00"
+   pricediv.append(p,p1)
+
+
+
+   var div4=document.createElement("div")
+     div4.id="cart-box-b-div"
+   
+     var div4_1=document.createElement("div")
+     div4_1.id="minus"
+     div4_1.innerText="-"
+     
+
+     var div4_2=document.createElement("div")
+     div4_2.id="ans"
+     div4_2.innerText="2"
+     var div4_3=document.createElement("div")
+     div4_3.id="plus"
+     div4_3.innerText="+"
+     var div4_4=document.createElement("div")
+     div4_4.id="cart-box-b-div2"
+     div4_4.innerText="60% off"
+
+
+     div4.append(div4_1,div4_2,div4_3,div4_4)
+     div3.append(h1,pricediv,div4)
+
+
+     var div5=document.createElement("div")
+     div5.id="cart-box-c"
+
+     var div5_i=document.createElement("i")
+     div5_i.className="fa-solid fa-trash-can"
+     div5.append(div5_i)
+
+     maindiv.append(div2,div3,div5)
+     document.getElementById("cart-boxes").append(maindiv)
+     console.log(maindiv)
+    
+    
+ })
+
+ document.getElementById("priceshow").innerText=total
+
+}
+
+//button click shoping
+
+document.getElementById("shop").addEventListener("click",function(){
+      window.location.href="earbuds.html"
+     })
+
+     //payment
+document.getElementById("upibutton").addEventListener("click",function(){
+      window.location.href="payment.html"
+     })
+     document.getElementById("cardbutton").addEventListener("click",function(){
+      window.location.href="payment.html"
+     })
+
+
+
+
+     document.getElementById("user").addEventListener("click",function(){
+      window.location.href="login.html"
+     })
+     document.getElementById("home").addEventListener("click",function(){
+      window.location.href="index.html"
+     })
+   
+
+//    popop
+let cpopop=document.querySelector("#cart-popop")
+let cartboxex=document.querySelector("#cart-box")
+let payment=document.querySelector("#payment")
+
+document.querySelector("#carthome").addEventListener("click", function(){
+    cartdataappend()
+ document.querySelector("#popop").style.display="flex"
+ document.querySelector("#body").style.overflow="hidden"
+ 
+})
+let close=document.querySelector("#close").addEventListener("click", function(){
+ document.querySelector("#popop").style.display="none"
+ document.querySelector("#body").style.overflow="visible"
+ 
+})
+
+
+// window.addEventListener("mouseup",function(e){
+//     if(e.target!=cpopop && e.target.parentElement !=cpopop 
+//     && e.target.parentElement!=payment &&e.target.parentElement !=cartboxex){
+//         document.querySelector("#popop").style.display="none"
+//         document.querySelector("#body").style.overflow="visible"
+//     }
+// })
+    
+</script>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/navbar.css">
+    <link rel="stylesheet" href="./style/popop.css">
+    <link rel="stylesheet" href="./style/footer.css">
+    <link rel="stylesheet" href="./css/all.min.css">
+    <style>
+        #login1{
+            height: 700px;
+            width: 100%;
+            background-color: white;
+            border: 1px solid red ;
+        }
+        #login1 >h1{
+color: black;
+text-align: center;
+
+        }
+        #login2 {
+            height: 40px;
+      margin: auto;
+      margin-bottom: 2%;
+            width: 8%;
+            display: flex;
+            justify-content: space-around;
+            
+        }
+        #login2 >img{
+
+height: 100%;
+
+        }
+        #login3{
+            display: grid;
+            grid-template-rows: repeat(1);
+            width: 36%;
+            height: 60%;
+            
+            margin: auto;
+            
+        }
+        #lable{
+            font-size: 16px;
+            color: rgb(82, 79, 79);
+            margin-bottom: 10px;
+            margin-top: 3%;
+         }
+        #loginid > input{
+             height: 40px;
+             width: 99%;
+             border-radius: 2px;
+                 margin-bottom: 3%;
+              margin-top: 3%;
+              border: 0.5px solid rgb(219, 211, 211);
+             font-size: 20px;
+             font-weight: 700;
+            
+         }
+         #submit{
+            height: 40px;
+             width: 100%;
+             margin-top: 3%;
+             margin-bottom: 5%;
+             border-radius: 5px;
+              padding-top: 1%;
+              border: 0.5px solid rgb(172, 166, 166);
+             font-size: 20px;
+             background-color: red;
+             color: white;
+             text-align: center;
+         }
+         #createacc{
+             font-size: bold;
+             font-size: 8px;
+             margin: 0%;
+             color: red;
+         }
+    </style>
+</head>
+<body>
+    <div id="header">
+    
+    </div>
+
+    <div id="popop">
+
+    </div>
+<!-- //login  -->
+<div id="login1">
+    <h1>Create Account</h1>
+    <div id="login2">
+        <img src="https://pnggrid.com/wp-content/uploads/2021/05/Facebook-logo-2021.png" alt="">
+        <img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png" alt="">
+
+    </div>
+    <div id="login3">
+        <form id="loginid">
+            <label id="lable">First Name</label>
+            <input type="text" id="firstname">
+            <label id="lable">Last Name</label>
+            <input type="text" id="lastname">
+            <label id="lable">Email</label>
+            <input type="text" id="email">
+            <label id="lable">Password</label>
+            <input type="password" id="password">
+            <button id="submit">create</button>
+            <a id="createacc" href="login.html"><h1>Log in with an existing account</h1></a>
+        </form>
+        
+    
+
+    </div>
+
+</div>
+    
+<!-- footer -->
+
+<div id="footer">
+
+
+</div>
+</body>
+</html>
+<script type="module">
+    import navbar from "./components/navbar.js"
+     import popop from "./components/popop.js"
+     import footer from "./components/footer.js"
+     let nav=navbar()
+
+     document.getElementById("header").innerHTML=nav
+
+     let pop=popop()
+
+document.getElementById("popop").innerHTML=pop
+
+     let foot=footer()
+     document.getElementById("footer").innerHTML=foot
+
+    const form = document.getElementById('loginid')
+			form.addEventListener('submit', registerUser)
+
+			async function registerUser(event) {
+				event.preventDefault()
+                const firstName = document.getElementById('firstname').value
+				const lastName = document.getElementById('lastname').value
+				const email = document.getElementById('email').value
+				const password = document.getElementById('password').value
+
+				const result = await fetch('https://my-boat-application.herokuapp.com/register', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+                       
+					},
+                    
+					body: JSON.stringify({
+                        firstName,
+                        lastName,
+						email,
+						password
+					})
+				}).then((res) => res.json())
+				console.log(result)
+
+				if (result.status === 'ok') {
+					// everythign went fine
+					alert('Success')
+					window.location.href="login.html"
+				} else {
+					alert(result.error)
+				}
+			}
+
+
+        
+            let cartdata=JSON.parse(localStorage.getItem("cartdata"))||[]
+    let itemdata=[]
+
+
+  
+        cartcount()
+function cartcount(){
+    let totalcart=JSON.parse(localStorage.getItem("cartdata"))
+    document.getElementById("cartshow").innerHTML=totalcart.length
+    console.log(totalcart.length)
+    
+}
+
+// search
+let search=[]
+document.getElementById("searchbar").addEventListener("keypress",(e)=>{
+    if(e.key=="Enter"){
+       
+
+        let value=document.getElementById("searchbar").value.toLowerCase()
+        
+search.push(value)
+localStorage.setItem("search",JSON.stringify(search))
+window.location.href="search.html"
+    }
+
+
+
+})
+
+
+var total=0
+
+function cartdataappend(){
+ cartdata.map((ele)=>{
+     total+=ele.price
+    
+    
+     var maindiv=document.createElement("div")
+     maindiv.id="cart-box"
+
+     var div2=document.createElement("div")
+     div2.id="cart-box-a"
+     var img=document.createElement("img")
+     img.src=ele.image_link
+     div2.append(img)
+     
+  
+
+     var div3=document.createElement("div")
+     div3.id="cart-box-b"
+
+     var h1=document.createElement("h1")
+     h1.innerText=ele.title
+
+ 
+
+     var pricediv=document.createElement("div")
+     pricediv.id="price"
+   var p=document.createElement("p")
+   p.innerText="Rs. "+ele.price
+   var p1=document.createElement("p")
+   p1.id="p1"
+   p1.innerText="Rs. 3,999.00"
+   pricediv.append(p,p1)
+
+
+
+   var div4=document.createElement("div")
+     div4.id="cart-box-b-div"
+   
+     var div4_1=document.createElement("div")
+     div4_1.id="minus"
+     div4_1.innerText="-"
+     
+
+     var div4_2=document.createElement("div")
+     div4_2.id="ans"
+     div4_2.innerText="2"
+     var div4_3=document.createElement("div")
+     div4_3.id="plus"
+     div4_3.innerText="+"
+     var div4_4=document.createElement("div")
+     div4_4.id="cart-box-b-div2"
+     div4_4.innerText="60% off"
+
+
+     div4.append(div4_1,div4_2,div4_3,div4_4)
+     div3.append(h1,pricediv,div4)
+
+
+     var div5=document.createElement("div")
+     div5.id="cart-box-c"
+
+     var div5_i=document.createElement("i")
+     div5_i.className="fa-solid fa-trash-can"
+     div5.append(div5_i)
+
+     maindiv.append(div2,div3,div5)
+     document.getElementById("cart-boxes").append(maindiv)
+     console.log(maindiv)
+    
+    
+ })
+
+ document.getElementById("priceshow").innerText=total
+
+}
+
+//button click shoping
+
+document.getElementById("shop").addEventListener("click",function(){
+      window.location.href="earbuds.html"
+     })
+
+     //payment
+document.getElementById("upibutton").addEventListener("click",function(){
+      window.location.href="payment.html"
+     })
+     document.getElementById("cardbutton").addEventListener("click",function(){
+      window.location.href="payment.html"
+     })
+
+
+
+
+     document.getElementById("user").addEventListener("click",function(){
+      window.location.href="login.html"
+     })
+     document.getElementById("home").addEventListener("click",function(){
+      window.location.href="index.html"
+     })
+   
+
+//    popop
+let cpopop=document.querySelector("#cart-popop")
+let cartboxex=document.querySelector("#cart-box")
+let payment=document.querySelector("#payment")
+
+document.querySelector("#carthome").addEventListener("click", function(){
+    cartdataappend()
+ document.querySelector("#popop").style.display="flex"
+ document.querySelector("#body").style.overflow="hidden"
+ 
+})
+let close=document.querySelector("#close").addEventListener("click", function(){
+ document.querySelector("#popop").style.display="none"
+ document.querySelector("#body").style.overflow="visible"
+ 
+})
+
+
+// window.addEventListener("mouseup",function(e){
+//     if(e.target!=cpopop && e.target.parentElement !=cpopop 
+//     && e.target.parentElement!=payment &&e.target.parentElement !=cartboxex){
+//         document.querySelector("#popop").style.display="none"
+//         document.querySelector("#body").style.overflow="visible"
+//     }
+// })
+    
+</script>
