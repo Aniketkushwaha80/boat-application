@@ -178,10 +178,7 @@ height: 5%;
    <!-- slide  -->
    <div id="slide">
        <img src="https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Web-Wave-Pro_1296x.jpg?v=1648034208" alt="">
-<div id="slidebutton">
-    <i class="fa fa-chevron-left prev-btn"></i>
-    <i class="fa fa-chevron-right next-btn"></i>
-</div>
+
    </div>
 
   
@@ -567,8 +564,8 @@ window.location.href="search.html"
 
 var total=0
 
-function cartdataappend(){
- cartdata.map((ele)=>{
+function cartdataappend(data){
+ data.map((ele,i)=>{
      total+=ele.price
     
     
@@ -612,7 +609,7 @@ function cartdataappend(){
 
      var div4_2=document.createElement("div")
      div4_2.id="ans"
-     div4_2.innerText="2"
+     div4_2.innerText="1"
      var div4_3=document.createElement("div")
      div4_3.id="plus"
      div4_3.innerText="+"
@@ -629,7 +626,12 @@ function cartdataappend(){
      div5.id="cart-box-c"
 
      var div5_i=document.createElement("i")
+  
      div5_i.className="fa-solid fa-trash-can"
+     div5_i.addEventListener("click",function(){
+deleteitem(i)
+     })
+   
      div5.append(div5_i)
 
      maindiv.append(div2,div3,div5)
@@ -638,6 +640,7 @@ function cartdataappend(){
     
     
  })
+ 
 
  document.getElementById("priceshow").innerText=total
 
@@ -674,18 +677,30 @@ let cartboxex=document.querySelector("#cart-box")
 let payment=document.querySelector("#payment")
 
 document.querySelector("#carthome").addEventListener("click", function(){
-    cartdataappend()
+    cartdataappend(cartdata)
  document.querySelector("#popop").style.display="flex"
+ document.querySelector("#slidetext").style.display="none"
  document.querySelector("#body").style.overflow="hidden"
  
 })
 let close=document.querySelector("#close").addEventListener("click", function(){
  document.querySelector("#popop").style.display="none"
+ document.querySelector("#slidetext").style.display="flex"
  document.querySelector("#body").style.overflow="visible"
  
 })
 
+// deletcart
+function deleteitem(i){
+    cartdata.splice(i,1)
+    
+localStorage.setItem("cartdata",JSON.stringify(cartdata))
+cartdataappend(cartdata)
+cartcount()
+
  
+
+    }
 
 
 // window.addEventListener("mouseup",function(e){

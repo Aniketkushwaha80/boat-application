@@ -136,7 +136,6 @@ height: 100%;
 
      let pop=popop()
 
-document.getElementById("popop").innerHTML=pop
 
      let foot=footer()
      document.getElementById("footer").innerHTML=foot
@@ -292,14 +291,11 @@ function cartdataappend(){
 document.getElementById("shop").addEventListener("click",function(){
       window.location.href="earbuds.html"
      })
+     document.getElementById("home").addEventListener("click",function(){
+      window.location.href="index.html"
+     })
 
-     //payment
-document.getElementById("upibutton").addEventListener("click",function(){
-      window.location.href="payment.html"
-     })
-     document.getElementById("cardbutton").addEventListener("click",function(){
-      window.location.href="payment.html"
-     })
+
 
 
 
@@ -320,11 +316,13 @@ let payment=document.querySelector("#payment")
 document.querySelector("#carthome").addEventListener("click", function(){
     cartdataappend()
  document.querySelector("#popop").style.display="flex"
+ document.querySelector("#slidetext").style.display="none"
  document.querySelector("#body").style.overflow="hidden"
  
 })
 let close=document.querySelector("#close").addEventListener("click", function(){
  document.querySelector("#popop").style.display="none"
+ document.querySelector("#slidetext").style.display="flex"
  document.querySelector("#body").style.overflow="visible"
  
 })

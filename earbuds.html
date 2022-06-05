@@ -143,7 +143,7 @@ color:rgb(113, 117, 121);
         
     </style>
 </head>
-<body>
+<body id="body">
     <div id="header">
     
     </div>
@@ -342,6 +342,7 @@ document.getElementById("select").addEventListener("change",changeitem)
         })
     }
 
+
     
 // "timeout"
 
@@ -400,8 +401,8 @@ window.location.href="search.html"
 
 var total=0
 
-function cartdataappend(){
- cartdata.map((ele)=>{
+function cartdataappend(data){
+ data.map((ele)=>{
      total+=ele.price
     
     
@@ -462,7 +463,13 @@ function cartdataappend(){
      div5.id="cart-box-c"
 
      var div5_i=document.createElement("i")
+
+     div5_i.addEventListener("click",function(){
+deleteitem(i)
+     })
      div5_i.className="fa-solid fa-trash-can"
+   
+
      div5.append(div5_i)
 
      maindiv.append(div2,div3,div5)
@@ -507,18 +514,30 @@ let cartboxex=document.querySelector("#cart-box")
 let payment=document.querySelector("#payment")
 
 document.querySelector("#carthome").addEventListener("click", function(){
-    cartdataappend()
+    cartdataappend(cartdata)
  document.querySelector("#popop").style.display="flex"
+ document.querySelector("#slidetext").style.display="none"
  document.querySelector("#body").style.overflow="hidden"
  
 })
 let close=document.querySelector("#close").addEventListener("click", function(){
  document.querySelector("#popop").style.display="none"
+ document.querySelector("#slidetext").style.display="flex"
  document.querySelector("#body").style.overflow="visible"
  
 })
 
+// deletcart
+function deleteitem(i){
+    cartdata.splice(i,1)
+    
+localStorage.setItem("cartdata",JSON.stringify(cartdata))
+cartdataappend(cartdata)
+cartcount()
 
+ 
+
+    }
 // window.addEventListener("mouseup",function(e){
 //     if(e.target!=cpopop && e.target.parentElement !=cpopop 
 //     && e.target.parentElement!=payment &&e.target.parentElement !=cartboxex){
